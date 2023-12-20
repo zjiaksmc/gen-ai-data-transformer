@@ -1,0 +1,234 @@
+[
+    {
+        "model_id": "text-bison@001",
+        "tag": "cleansing-ssn",
+        "prompt": {
+            "context": "you modify or reformat the input according to request. the output must contains same or less characters than the input.",
+            "examples": [
+                {
+                    "input": "reformat input 233-09-1931 into a social security number. Output should only has 9 digits numbers.",
+                    "output": "233091931"
+                },
+                {
+                    "input": "reformat input 013031233 into a social security number. Output should only has 9 digits numbers.",
+                    "output": "013031233"
+                },
+                {
+                    "input": "reformat input A233919 into social security number. Output should only has 9 digits numbers.",
+                    "output": "INVALID"
+                }
+            ],
+            "input_template": "reformat input {} into social security number. Output should only has 9 digits numbers."
+        },
+        "parameters": {
+            "max_output_tokens": 512,
+            "temperature": 1,
+            "top_p": 1,
+            "top_k": 40
+        }
+    },
+    {
+        "model_id": "text-bison@001",
+        "tag": "cleansing-person-name",
+        "prompt": {
+            "context": "you modify or reformat the input according to request. the output must contains same or less characters than the input.",
+            "examples": [
+                {
+                    "input": "reformat input Jack into a person name. Output should only contain letters in uppercase.",
+                    "output": "JACK"
+                },
+                {
+                    "input": "reformat input JOHN into a person name. Output should only contain letters in uppercase.",
+                    "output": "JOHN"
+                },
+                {
+                    "input": "reformat input zhou into a person name. Output should only contain letters in uppercase.",
+                    "output": "ZHOU"
+                },
+                {
+                    "input": "reformat input wILLSON into a person name. Output should only contain letters in uppercase.",
+                    "output": "WILLSON"
+                },
+                {
+                    "input": "reformat input Wade2339 into a person name. Output should only contain letters in uppercase.",
+                    "output": "INVALID"
+                }
+            ],
+            "input_template": "reformat input {} into a person name. Output should only contain letters in uppercase."
+        },
+        "parameters": {
+            "max_output_tokens": 512,
+            "temperature": 1,
+            "top_p": 1,
+            "top_k": 40
+        }
+    },
+    {
+        "model_id": "text-bison@001",
+        "tag": "cleansing-date",
+        "prompt": {
+            "context": "you modify or reformat the input according to request. the output must contains same or less characters than the input.",
+            "examples": [
+                {
+                    "input": "reformat input '09/02/1980' into a date in the format yyyymmdd. Output should only contain numbers and be exactly 8 digits.",
+                    "output": "19800902"
+                },
+                {
+                    "input": "reformat input '1992-09-13' into a date in the format yyyymmdd. Output should only contain numbers and be exactly 8 digits.",
+                    "output": "19920913"
+                },
+                {
+                    "input": "reformat input '99-05-23' into a date in the format yyyymmdd. Output should only contain numbers and be exactly 8 digits.",
+                    "output": "19990523"
+                },
+                {
+                    "input": "reformat input '99-34-67' into a date in the format yyyymmdd. Output should only contain numbers and be exactly 8 digits.",
+                    "output": "INVALID"
+                },
+                {
+                    "input": "reformat input '20200718' into a date in the format yyyymmdd. Output should only contain numbers and be exactly 8 digits.",
+                    "output": "20200718"
+                },
+                {
+                    "input": "reformat input 'Sep 5, 2022' into a date in the format yyyymmdd. Output should only contain numbers and be exactly 8 digits.",
+                    "output": "20220905"
+                },
+                {
+                    "input": "reformat input 'March 17th, 1997' into a date in the format yyyymmdd. Output should only contain numbers and be exactly 8 digits.",
+                    "output": "19970317"
+                },
+                {
+                    "input": "reformat input 'Sep 98, 2022' into a date in the format yyyymmdd. Output should only contain numbers and be exactly 8 digits.",
+                    "output": "INVALID"
+                }
+            ],
+            "input_template": "reformat input '{}' into a date in the format yyyymmdd. Output should only contain numbers and be exactly 8 digits."
+        },
+        "parameters": {
+            "max_output_tokens": 512,
+            "temperature": 1,
+            "top_p": 1,
+            "top_k": 40
+        }
+    },
+    {
+        "model_id": "text-bison@001",
+        "tag": "cleansing-gender",
+        "prompt": {
+            "context": "you modify or reformat the input according to request. the output must contains one of the values from 'MALE', 'FEMALE', 'OTHER'.",
+            "examples": [
+                {
+                    "input": "reformat input 'm' into a human gender. Output should only be one 'MALE', 'FEMALE', or 'OTHER'. If cannot convert, return INVALID.",
+                    "output": "MALE"
+                },
+                {
+                    "input": "reformat input 'f' into a human gender. Output should only be one 'MALE', 'FEMALE', or 'OTHER'. If cannot convert, return INVALID.",
+                    "output": "FEMALE"
+                },
+                {
+                    "input": "reformat input 'Male' into a human gender. Output should only be one 'MALE', 'FEMALE', or 'OTHER'. If cannot convert, return INVALID.",
+                    "output": "MALE"
+                },
+                {
+                    "input": "reformat input 'transgender' into a human gender. Output should only be one 'MALE', 'FEMALE', or 'OTHER'. If cannot convert, return INVALID.",
+                    "output": "OTHER"
+                }
+            ],
+            "input_template": "reformat input '{}' into a human gender. Output should only be one 'MALE', 'FEMALE', or 'OTHER'. If cannot convert, return INVALID."
+        },
+        "parameters": {
+            "max_output_tokens": 512,
+            "temperature": 1,
+            "top_p": 1,
+            "top_k": 40
+        }
+    },
+    {
+        "model_id": "text-bison@001",
+        "tag": "cleansing-race",
+        "prompt": {
+            "context": "you modify or reformat the input according to request. the output must be from one of these values: 'WHITE', 'AA', 'AIAN', 'ASIAN', 'NHOPI', 'OTHER'.",
+            "examples": [
+                {
+                    "input": "reformat input 'asian' into a census race. the output must be from one of these values: 'WHITE', 'AA', 'AIAN', 'ASIAN', 'NHOPI', 'OTHER'. If cannot convert, return INVALID.",
+                    "output": "ASIAN"
+                },
+                {
+                    "input": "reformat input 'caucasian' into a census race. the output must be from one of these values: 'WHITE', 'AA', 'AIAN', 'ASIAN', 'NHOPI', 'OTHER'. If cannot convert, return INVALID.",
+                    "output": "WHITE"
+                },
+                {
+                    "input": "reformat input 'african american' into a census race. the output must be from one of these values: 'WHITE', 'AA', 'AIAN', 'ASIAN', 'NHOPI', 'OTHER'. If cannot convert, return INVALID.",
+                    "output": "AA"
+                },
+                {
+                    "input": "reformat input 'WADASDSA' into a census race. the output must be from one of these values: 'WHITE', 'AA', 'AIAN', 'ASIAN', 'NHOPI', 'OTHER'. If cannot convert, return INVALID.",
+                    "output": "INVALID"
+                },
+                {
+                    "input": "reformat input 'american indian' into a census race. the output must be from one of these values: 'WHITE', 'AA', 'AIAN', 'ASIAN', 'NHOPI', 'OTHER'. If cannot convert, return INVALID.",
+                    "output": "AIAN"
+                },
+                {
+                    "input": "reformat input 'native alaska' into a census race. the output must be from one of these values: 'WHITE', 'AA', 'AIAN', 'ASIAN', 'NHOPI', 'OTHER'. If cannot convert, return INVALID.",
+                    "output": "AIAN"
+                },
+                {
+                    "input": "reformat input 'pacific islander' into a census race. the output must be from one of these values: 'WHITE', 'AA', 'AIAN', 'ASIAN', 'NHOPI', 'OTHER'. If cannot convert, return INVALID.",
+                    "output": "NHOPI"
+                },
+                {
+                    "input": "reformat input 'native hawaiian' into a census race. the output must be from one of these values: 'WHITE', 'AA', 'AIAN', 'ASIAN', 'NHOPI', 'OTHER'. If cannot convert, return INVALID.",
+                    "output": "NHOPI"
+                }
+            ],
+            "input_template": "reformat input '{}' into a census race. the output must be from one of these values: 'WHITE', 'AA', 'AIAN', 'ASIAN', 'NHOPI', 'OTHER'. If cannot convert, return INVALID."
+        },
+        "parameters": {
+            "max_output_tokens": 512,
+            "temperature": 1,
+            "top_p": 1,
+            "top_k": 40
+        }
+    },
+    {
+        "model_id": "text-bison@001",
+        "tag": "cleansing-zip",
+        "prompt": {
+            "context": "you modify or reformat the input according to request. the output must be a valid US zipcode with 5 digits numbers.",
+            "examples": [
+                {
+                    "input": "reformat input '67092' into a zip code. the output must be a valid US zip code with 5 digits numbers. If cannot convert, return INVALID.",
+                    "output": "67092"
+                },
+                {
+                    "input": "reformat input '1343s' into a zip code. the output must be a valid US zip code with 5 digits numbers. If cannot convert, return INVALID.",
+                    "output": "INVALID"
+                },
+                {
+                    "input": "reformat input '231' into a zip code. the output must be a valid US zip code with 5 digits numbers. If cannot convert, return INVALID.",
+                    "output": "INVALID"
+                },
+                {
+                    "input": "reformat input 'sdsad' into a zip code. the output must be a valid US zip code with 5 digits numbers. If cannot convert, return INVALID.",
+                    "output": "INVALID"
+                },
+                {
+                    "input": "reformat input '2394845543' into a zip code. the output must be a valid US zip code with 5 digits numbers. If cannot convert, return INVALID.",
+                    "output": "INVALID"
+                },
+                {
+                    "input": "reformat input '46256-2031' into a zip code. the output must be a valid US zip code with 5 digits numbers. If cannot convert, return INVALID.",
+                    "output": "46256"
+                }
+            ],
+            "input_template": "reformat input '{}' into a zip code. the output must be a valid US zip code with 5 digits numbers. If cannot convert, return INVALID."
+        },
+        "parameters": {
+            "max_output_tokens": 512,
+            "temperature": 1,
+            "top_p": 1,
+            "top_k": 40
+        }
+    }
+]

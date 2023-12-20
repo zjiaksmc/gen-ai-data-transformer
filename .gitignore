@@ -282,4 +282,7 @@ log/
 spark-warehouse
 spark-warehouse/
 
+examples/cache
+examples/set-env
+
 
