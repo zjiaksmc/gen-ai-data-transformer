@@ -17,3 +17,5 @@ google-cloud-secret-manager
 randomname
 pandas
 git+https://github.com/zjiaksmc/gen-ai-data-transformer.git@master
+beautifulsoup4
+django-environ

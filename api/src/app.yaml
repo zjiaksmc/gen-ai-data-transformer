@@ -18,10 +18,10 @@
 # [START gaestd_py_django_app_yaml]
 service: aidf-backend
 runtime: python38
+instance_class: F4_1G
 
-env_variables:
-  # This setting is used in settings.py to configure your ALLOWED_HOSTS
-  APPENGINE_URL: https://aidf-backend-dot-docai-warehouse-demo.uc.r.appspot.com
+includes:
+ - env_variables.yaml
 
 handlers:
 # This configures Google App Engine to serve the files in the app's static

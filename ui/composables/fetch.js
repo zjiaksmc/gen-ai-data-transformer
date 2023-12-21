@@ -9,7 +9,7 @@ export const useMyFetch = (url, options = {}) => {
     if (process.server) {
         defaultOptions.baseURL = process.env.SERVER_DOMAIN
     } else {
-        defaultOptions.baseURL = 'http://localhost:5001'
+        defaultOptions.baseURL = 'https://aidf-backend-dot-docai-warehouse-demo.uc.r.appspot.com'
     }
     return useFetch(url, Object.assign(defaultOptions, options))
 }

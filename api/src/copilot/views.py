@@ -1,6 +1,6 @@
 import sys
+import os
 import datetime
-import pandas as pd
 
 from django.conf import settings
 from django.core.cache import cache
@@ -218,8 +218,10 @@ class ChatSessionDetail(GenericAPIView):
                     location=settings.GCP_LOCATION,
                     model_config=model_config,
                     session_id=chat_session.session_id,
-                    dbclient=dbclient
+                    dbclient=dbclient,
+                    ignore_message_history=True
                 )
+                session.message_history = []
                 res = session.send_proprietary_search(message, number_results=10)
             elif tool == "web_search":
                 user_agent = tool_args.get("user_agent", None)
@@ -235,7 +237,8 @@ class ChatSessionDetail(GenericAPIView):
                     location=settings.GCP_LOCATION,
                     model_config=model_config,
                     session_id=chat_session.session_id,
-                    dbclient=dbclient
+                    dbclient=dbclient,
+                    ignore_message_history=True
                 )
                 res = session.send_web_search(message, ua=user_agent, number_results=10)
             else:

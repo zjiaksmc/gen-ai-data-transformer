@@ -10,6 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
+import environ
+from urllib.parse import urlparse
 
 from pathlib import Path
 from django.conf.global_settings import ADMINS
@@ -22,16 +24,30 @@ DEFAULT_SAMPLE_URL = "/Users/zjia/Workspace/gen-ai-data-transformer/examples/dat
 # GCP_BQ_DB=os.environ.get("GCP_BQ_DB", "utah_lakehouse_demo")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'j&64k#^26-z#z9(ash42xbfbmif_9j7w@0q!kj6zi)7_in(8k#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+env = environ.Env(DEBUG=(bool, False))
+env_file = os.path.join(BASE_DIR, ".env")
+
+DEBUG = env("DEBUG")
+
+APPENGINE_URL = env("APPENGINE_URL", default=None)
+if APPENGINE_URL:
+    # Ensure a scheme is present in the URL before it's processed.
+    if not urlparse(APPENGINE_URL).scheme:
+        APPENGINE_URL = f"https://{APPENGINE_URL}"
+
+    ALLOWED_HOSTS = [urlparse(APPENGINE_URL).netloc]
+    CSRF_TRUSTED_ORIGINS = [APPENGINE_URL]
+    SECURE_SSL_REDIRECT = True
+else:
+    ALLOWED_HOSTS = ["*"]
 
 # HOST and ADMINS
-ALLOWED_HOSTS=['*']
 MANAGERS = ADMINS
 
 # Application definition
@@ -194,6 +210,8 @@ PAGE_SIZE = 20
 # }
 
 # ML/AI Settings
+GITHUB_SECRET = env("GITHUB_SECRET", default=None)
+os.environ["GITHUB_SECRET"] = GITHUB_SECRET
 COPILOT = {
     "model_id": "codechat-bison@001",
     "tag": "copilot-cleansing",

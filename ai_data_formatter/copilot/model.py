@@ -62,7 +62,8 @@ class PromptCodeChatSession(ChatModel, VertexAIAgent, SessionHistoryService):
         model_config,
         session_id=None,
         dbclient=None,
-        pre_load_model=False
+        pre_load_model=False,
+        ignore_message_history=False
     ):
         VertexAIAgent.__init__(self, project_id, location)
         SessionHistoryService.__init__(self, dbclient)
@@ -71,7 +72,10 @@ class PromptCodeChatSession(ChatModel, VertexAIAgent, SessionHistoryService):
         self.model_id = model_config.model_id
         self.pre_load_model = pre_load_model
         if session_id:
-            self.message_history = self.get_session_history(session_id=session_id)
+            if not ignore_message_history:
+                self.message_history = self.get_session_history(session_id=session_id)
+            else:
+                self.message_history = []
             self._session_id = session_id
         else:
             self.message_history = []

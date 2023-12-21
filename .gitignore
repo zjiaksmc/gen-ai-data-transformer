@@ -284,5 +284,6 @@ spark-warehouse/
 
 examples/cache
 examples/set-env
+env_variables.yaml
 
 
