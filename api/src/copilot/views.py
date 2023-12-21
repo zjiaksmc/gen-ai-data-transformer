@@ -221,7 +221,6 @@ class ChatSessionDetail(GenericAPIView):
                     dbclient=dbclient,
                     ignore_message_history=True
                 )
-                session.message_history = []
                 res = session.send_proprietary_search(message, number_results=10)
             elif tool == "web_search":
                 user_agent = tool_args.get("user_agent", None)
