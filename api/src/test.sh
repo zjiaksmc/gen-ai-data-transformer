@@ -9,7 +9,7 @@ uwsgi --ini service.ini
 
 ## Deploy API to GCP app engine
 gcloud app create --region=us-central --service-account=general-access@docai-warehouse-demo.iam.gserviceaccount.com
-gcloud app deploy --quiet
+gcloud app deploy --no-cache --quiet
 
 # Testing the API endpoint
 ## /copilot/chat/session/{session_id}

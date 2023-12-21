@@ -210,7 +210,7 @@ PAGE_SIZE = 20
 # }
 
 # ML/AI Settings
-GITHUB_SECRET = env("GITHUB_SECRET", default=None)
+GITHUB_SECRET = env("GITHUB_SECRET", default="")
 os.environ["GITHUB_SECRET"] = GITHUB_SECRET
 COPILOT = {
     "model_id": "codechat-bison@001",

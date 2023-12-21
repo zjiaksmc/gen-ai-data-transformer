@@ -97,29 +97,29 @@ const submit = async () => {
   const { valid } = await signInForm.value.validate()
   if (valid) {
     submitting.value = true
-    // const { data, error } = await useMyFetch('/account/login/', {
-    //   method: 'POST',
-    //   body: JSON.stringify(formData.value)
-    // })
-    submitting.value = false
-    // if (error.value) {
-    //   if (error.value.statusCode === 400) {
-    //     if (error.value.data.non_field_errors) {
-    //       errorMsg.value = error.value.data.non_field_errors[0]
-    //     }
-    //   } else {
-    //     errorMsg.value = 'Something went wrong. Please try again.'
-    //   }
-    // } else {
-    //   setUser(data.value.user)
-    //   const callback = route.query.callback ? decodeURIComponent(route.query.callback) : '/'
-    //   await navigateTo(callback)
-    // }
-    setUser({
-      'username': 'aidf_admin', 'email': 'zjia@resultant.com', 'first_name': '', 'last_name': ''
+    const { data, error } = await useMyFetch('/account/login/', {
+      method: 'POST',
+      body: JSON.stringify(formData.value)
     })
-    const callback = route.query.callback ? decodeURIComponent(route.query.callback) : '/'
-    await navigateTo(callback)
+    submitting.value = false
+    if (error.value) {
+      if (error.value.statusCode === 400) {
+        if (error.value.data.non_field_errors) {
+          errorMsg.value = error.value.data.non_field_errors[0]
+        }
+      } else {
+        errorMsg.value = 'Something went wrong. Please try again.'
+      }
+    } else {
+      setUser(data.value.user)
+      const callback = route.query.callback ? decodeURIComponent(route.query.callback) : '/'
+      await navigateTo(callback)
+    }
+    // setUser({
+    //   'username': 'aidf_admin', 'email': 'zjia@resultant.com', 'first_name': '', 'last_name': ''
+    // })
+    // const callback = route.query.callback ? decodeURIComponent(route.query.callback) : '/'
+    // await navigateTo(callback)
   }
 }
 
